@@ -3,6 +3,7 @@ import { Game } from './game.js'
 let game = undefined;
 let gameBoard = document.getElementById('board-holder')
 let gameName = document.getElementById('game-name')
+let clickRow = document.getElementById('click-targets')
 
 function updateUI() {
     if (!game) {
@@ -10,6 +11,14 @@ function updateUI() {
     } else {
         gameBoard.classList.remove('is-invisible')
         gameName.innerHTML = game.getName()
+
+        if(game.currentPlayer === 1){
+            clickRow.classList.remove('red')
+            clickRow.classList.add('black')
+        } else {
+            clickRow.classList.add('red')
+            clickRow.classList.remove('black')
+        }
     }
 }
 
@@ -32,10 +41,13 @@ window.addEventListener('DOMContentLoaded', event => {
         p1Input.value = '';
         p2Input.value = '';
         newGameBtn.disabled = true;
-        console.log(newGameBtn);
         updateUI();
     })
 
+    clickRow.addEventListener('click', event => {
+        game.playInColumn();
+        updateUI();
+    })
 
 
 
