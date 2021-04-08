@@ -1,4 +1,4 @@
-import {Column} from './column.js'
+import { Column } from './column.js'
 
 
 export class Game {
@@ -22,7 +22,8 @@ export class Game {
     }
 
     playInColumn(index) {
-        if(this.currentPlayer === 1){
+        this.columns[index].add(this.currentPlayer)
+        if (this.currentPlayer === 1) {
 
             this.currentPlayer = 2
 
@@ -34,7 +35,7 @@ export class Game {
 
     }
 
-    getTokenAt(rowIndex, ColIndex){
+    getTokenAt(rowIndex, ColIndex) {
         let targetColumn = this.columns[ColIndex]
 
         return targetColumn.getTokenAtCol(rowIndex)

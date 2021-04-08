@@ -12,12 +12,31 @@ function updateUI() {
         gameBoard.classList.remove('is-invisible')
         gameName.innerHTML = game.getName()
 
-        if(game.currentPlayer === 1){
+        if (game.currentPlayer === 1) {
             clickRow.classList.remove('red')
             clickRow.classList.add('black')
         } else {
             clickRow.classList.add('red')
             clickRow.classList.remove('black')
+        }
+
+        for (let i = 0; i <= 5; i += 1) {
+            for (let j = 0; j <= 6; j += 1) {
+                let selectedSquare = document.getElementById(`square-${i}-${j}`)
+                let getTokenResult = game.getTokenAt(i, j)
+
+                selectedSquare.innerHTML = '';
+                if (getTokenResult === 1) {
+                    let blackDiv = document.createElement('div')
+                    blackDiv.classList.add('token', 'black');
+                    selectedSquare.append(blackDiv)
+                }
+                else if (getTokenResult === 2) {
+                    let redDiv = document.createElement('div')
+                    redDiv.classList.add('token', 'red');
+                    selectedSquare.append(redDiv)
+                }
+            }
         }
     }
 }
@@ -45,7 +64,12 @@ window.addEventListener('DOMContentLoaded', event => {
     })
 
     clickRow.addEventListener('click', event => {
-        game.playInColumn();
+        let targetID = event.target.id
+        if (!targetID.startsWith('column-')) return
+        let targetColIndex = Number.parseInt(targetID[targetID.length - 1])
+        console.log(targetColIndex);
+        game.playInColumn(targetColIndex);
+        // Possible change - inside/outside loop
         updateUI();
     })
 

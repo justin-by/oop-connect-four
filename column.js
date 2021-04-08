@@ -1,23 +1,31 @@
-import {Game} from './game.js'
+import { Game } from './game.js'
 
-export class Column{
-    constructor(rowArray = []){
-        this.rowArray = rowArray;
+export class Column {
+    constructor() {
+        this.tokens = [];
 
     }
 
-    add(currentPlayer){
-        this.rowArray.shift(currentPlayer)
+    add(currentPlayer) {
+        if (!this.isFull()) {
+        this.tokens.push(currentPlayer)
+        }
     }
 
-    getTokenAtCol(rowIndex){
-       let value = this.rowArray[rowIndex];
+    getTokenAtCol(rowIndex) {
+        return this.tokens[5-rowIndex]
 
-       if(value === 1) return 1;
-       else if(value === 2) return 2;
-       else {
-           return null;
-       }
+        // let value = this.tokens[rowIndex];
 
+        // if (value === 1) return 1;
+        // else if (value === 2) return 2;
+        // else {
+        //     return null;
+        // }
+
+    }
+
+    isFull() {
+        return (this.tokens.length === 6)
     }
 }
