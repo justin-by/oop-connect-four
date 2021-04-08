@@ -1,4 +1,4 @@
-import { Game } from './game.js'
+// import { Game } from './game.js'
 
 export class Column {
     constructor() {
@@ -8,12 +8,12 @@ export class Column {
 
     add(currentPlayer) {
         if (!this.isFull()) {
-        this.tokens.push(currentPlayer)
+            this.tokens.push(currentPlayer)
         }
     }
 
     getTokenAtCol(rowIndex) {
-        return this.tokens[5-rowIndex]
+        return this.tokens[5 - rowIndex]
 
         // let value = this.tokens[rowIndex];
 
@@ -28,4 +28,6 @@ export class Column {
     isFull() {
         return (this.tokens.length === 6)
     }
+
+
 }

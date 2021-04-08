@@ -38,6 +38,16 @@ function updateUI() {
                 }
             }
         }
+
+        for (let i = 0; i <= 6; i += 1) {
+            let selectedColumn = document.getElementById(`column-${i}`)
+            if (game.isColumnFull(i)) {
+                selectedColumn.classList.add('full')
+            } else {
+                selectedColumn.classList.remove('full')
+            }
+
+        }
     }
 }
 
@@ -67,7 +77,6 @@ window.addEventListener('DOMContentLoaded', event => {
         let targetID = event.target.id
         if (!targetID.startsWith('column-')) return
         let targetColIndex = Number.parseInt(targetID[targetID.length - 1])
-        console.log(targetColIndex);
         game.playInColumn(targetColIndex);
         // Possible change - inside/outside loop
         updateUI();

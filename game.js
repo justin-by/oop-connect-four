@@ -41,4 +41,8 @@ export class Game {
         return targetColumn.getTokenAtCol(rowIndex)
 
     }
+
+    isColumnFull(index) {
+        return this.columns[index].isFull()
+    }
 }
