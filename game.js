@@ -1,4 +1,5 @@
 import { Column } from './column.js'
+import { ColumnWinInspector } from './column-win-inspector.js'
 
 
 export class Game {
@@ -22,6 +23,15 @@ export class Game {
         if (this.winnerNumber === 3) {
             return `${this.playerOneName} ties with ${this.playerTwoName}`
         }
+
+        if (this.winnerNumber === 1) {
+            return `${this.playerOneName} wins!`
+        }
+
+        if (this.winnerNumber === 2) {
+            return `${this.playerTwoName} wins!`
+        }
+
         return `${this.playerOneName} vs. ${this.playerTwoName}`
     }
 
@@ -39,6 +49,7 @@ export class Game {
 
         }
         this.checkForTie();
+        this.checkForColumnWin();
     }
 
     checkForTie() {
@@ -48,7 +59,7 @@ export class Game {
 
             }
         }
-     this.winnerNumber = 3;
+        this.winnerNumber = 3;
 
     }
 
@@ -60,6 +71,25 @@ export class Game {
     }
 
     isColumnFull(index) {
+        if (this.winnerNumber === 1 || this.winnerNumber === 2) {
+            return true;
+        }
+
         return this.columns[index].isFull()
+    }
+
+    checkForColumnWin() {
+        if (this.winnerNumber !== 0) {
+            return;
+        }
+        let result;
+        this.columns.forEach((currentColumn) => {
+            result = new ColumnWinInspector(currentColumn).inspect();
+            console.log(result);
+            if (result === 1 || result === 2) {
+                this.winnerNumber = result;
+                return;
+            }
+        })
     }
 }

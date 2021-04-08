@@ -78,7 +78,6 @@ window.addEventListener('DOMContentLoaded', event => {
         if (!targetID.startsWith('column-')) return
         let targetColIndex = Number.parseInt(targetID[targetID.length - 1])
         game.playInColumn(targetColIndex);
-        // Possible change - inside/outside loop
         updateUI();
     })
 
